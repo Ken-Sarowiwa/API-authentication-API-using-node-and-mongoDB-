@@ -22,7 +22,10 @@ app.use('users ', users) // middleware for handling user requests
 app.use(errors.Errorhandler)// middleware for handling errors
 
 // mongo DB setup 
+const uri = "mongodb+srv://cluster0.nz9r8.mongodb.net/myFirstDatabase";
+Mongoose.connect(uri, {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
+const db = Mongoose.connection;
+db.on(('error', console.error.bind(console, 'connection error:')));
+db.once('open', () => console.log(`Connected to mongo at ${uri}`));
 
-
-
-
+app.listen(3002);
